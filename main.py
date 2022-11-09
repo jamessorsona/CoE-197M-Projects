@@ -9,6 +9,7 @@ from tkinter import *
 from PIL import Image, ImageTk
 import numpy as np
 
+# getting the image dimensions and resizing according to canvas
 def get_image_dimensions(file_path):
     file = Image.open(file_path)
     width, height = file.size
@@ -20,6 +21,7 @@ def get_image_dimensions(file_path):
         width = 540
     return width, height
 
+# mark the image in the tkinter canvas then execute remove_distortion() function once 4 points are collected
 def mark_coordinates(event):
     if len(source_coordinates) < 4:
         source_coordinates.append([event.x, event.y])
@@ -27,20 +29,27 @@ def mark_coordinates(event):
     if len(source_coordinates) == 4:
         remove_distortion()
 
+# reorder the coordinates into upper and lower given the 4 points
 def get_order(coordinates):
-    coordinates.sort(key = lambda x: x[1])
-    upper = [coordinates[0], coordinates[1]]
+    upper = []
+    lower = []
+    for i in range(4):
+        if coordinates[i][1] < 360:
+            upper.append(coordinates[i])
+        else:
+            lower.append(coordinates[i])
     upper.sort()
-    lower = [coordinates[2], coordinates[3]]
     lower.sort()
-    return [upper[0], upper[1], lower[0], lower[1]]
+    return upper + lower
 
+# order the matrix [x -> y, y -> x]
 def order_matrix(matrix):
     x, y, z = matrix.shape
     new_matrix = np.zeros((y,x,z))
     for i in range(x):
         new_matrix[:,i] = matrix[i]
     return new_matrix.astype(int)
+# reorder back the matrix [y -> x, x -> y]
 def reorder_matrix(matrix):
     x, y, z = matrix.shape
     image = np.zeros((y,x,z))
@@ -48,6 +57,7 @@ def reorder_matrix(matrix):
         image[:,i] = matrix[i]
     return image.astype(int)
 
+# removes the projective distortion 
 def remove_distortion():
     # getting the coordinates
     ordered_source_coordinates = get_order(source_coordinates)
@@ -103,6 +113,7 @@ if __name__ == "__main__":
 
     # getting image file
     file_path = "./test-images/cs-study-nook.jpg"
+
     # getting the image dimensions
     source_width, source_height = get_image_dimensions(file_path)
 
@@ -113,4 +124,5 @@ if __name__ == "__main__":
     source_image_canvas = source_canvas.create_image(0,0,image = source_image, anchor=NW)
     source_canvas.bind('<Button-1>', mark_coordinates)
 
+    # tkinter mainloop
     root.mainloop()
