@@ -1,4 +1,4 @@
-# CoE-197M-Removing-Projective-Distortion
+# CoE-197M-Projects
 
 ## CoE 197M Foundation of Machine Learning - Assignment 1
 ### Removing Projective Distortion on Images
