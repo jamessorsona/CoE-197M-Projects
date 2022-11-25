@@ -20,4 +20,4 @@ To run:
 python main.py
 ```
 
-## Assignment 2 - Polynomial Solver
+## Assignment 2 - Polynomial Solver using SGD in TinyGrad
