@@ -1,7 +1,7 @@
 # CoE-197M-Projects
 Course Title: **CoE 197M Foundations of Machine Learning** \
 Section: **M-THY** \
-Professor: **Rowel Atienza**
+Instructor: **Rowel Atienza**
 
 ## Assignment 1 - Removing Projective Distortion on Images
 
