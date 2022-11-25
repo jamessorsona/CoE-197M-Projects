@@ -1,5 +1,5 @@
 # CoE-197M-Projects
-** CoE 197M Foundations of Machine Learning **
+**CoE 197M Foundations of Machine Learning**
 
 ## Assignment 1 - Removing Projective Distortion on Images
 
