@@ -21,7 +21,7 @@ python main.py
 ```
 
 ## Assignment 2 - Polynomial Solver using SGD in TinyGrad
-Objective: \
+Objective:
 * SGD is a useful algorithm with many applications. In this assignment, we will use SGD in the TinyGrad framework as a polynomial solver - to find the degree and coefficients. \
 Install requirements:
 ```
