@@ -154,18 +154,15 @@ def main():
     # get the best model
     coefficients = best_models[losses.index(min(losses))]
 
-    print(f"Degree: {len(coefficients)}")
-    print(f"Coefficients: {coefficients}")
-
     # testing the best model against data_test
     best_model = Model(len(coefficients)-1)
     best_model.load_polynomial(np.array(coefficients).reshape(-1,1))
-
     test = Load_Model(x_test, y_test, 32, False, True, len(coefficients)-1)
-
     y_test_pred = best_model.forward_pass(test.get_features(x_test)).reshape(-1, 1)
     test_r2 = metrics.r2_score(y_test, y_test_pred.data)
 
+    print(f"Degree: {len(coefficients)}")
+    print(f"Coefficients: {coefficients}")
     print(f"R2 Score: {test_r2}")
 
 
