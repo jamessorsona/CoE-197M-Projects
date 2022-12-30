@@ -118,7 +118,7 @@ def main():
         alpha = 0.5
 
         best = []
-        bestloss = None
+        best_loss = None
 
         # train model
         for epoch in range(epochs):
@@ -143,15 +143,13 @@ def main():
             validate_loss /= len(train.x)
 
             # save the best model
-            if bestloss is None:
-                bestloss = validate_loss
-            else:
-                if bestloss > validate_loss:
-                    bestloss = validate_loss
-                    best = [c[0] for c in model.get_polynomial()]
+            best_loss = validate_loss
+            if best_loss is not None and best_loss > validate_loss:
+                best = [c[0] for c in model.get_polynomial()]
+                    
 
             best_models.append([c[0] for c in model.get_polynomial()])
-            losses.append(bestloss)
+            losses.append(best_loss)
 
     # get the best model
     best_coeffs = best_models[losses.index(min(losses))]
