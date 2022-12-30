@@ -66,14 +66,13 @@ class Load_Model:
     def get_features(self, x):
         b = np.hstack((np.ones((len(x), 1)),x))
         feats = np.hstack([((b[:,1] ** i).reshape((len(x),1))) for i in range(self.degree+1)])
-        # feats[:, 1:] = (feats[:, 1:] - np.mean(feats[:, 1:], axis=0)) / np.std(feats[:, 1:], axis=0)
 
-        feats_tensor = Tensor(feats, requires_grad = False)
-        return feats_tensor
+        tensor_features = Tensor(feats, requires_grad = False)
+        return tensor_features
 
     def unshuffle_data(self):
-        L = sorted(zip(self.x,self.y), key=itemgetter(0))
-        self.x, self.y = zip(*L)
+        unshuffle = sorted(zip(self.x,self.y), key=itemgetter(0))
+        self.x, self.y = zip(*unshuffle)
 
     def shuffle_data(self):
         x_shuffled = []
