@@ -1,4 +1,3 @@
-tinygrad @ git+https://github.com/geohot/tinygrad.git
 numpy
 pandas
 scikit-learn
