@@ -101,7 +101,7 @@ def main():
     # hyperparameters
     epochs = 200
     batch_size = 32
-    learning_rate = [3e-4, 3e-5, 3e-6, 3e-8, 3e-10]
+    learning_rates = [3e-4, 3e-5, 3e-6, 3e-8, 3e-10]
     
     best_models = []
     losses = []
@@ -112,7 +112,7 @@ def main():
 
         # initialize model
         model = Model(degree)
-        optimizer = optim.SGD(model.poly, lr=learning_rate[degree])
+        optimizer = optim.SGD(model.poly, lr=learning_rates[degree])
         train = Load_Model(x_train, y_train, batch_size, True, True, degree)
         testing = Load_Model(x_testing, y_testing, batch_size, False, True, degree)
         alpha = 0.5
@@ -152,16 +152,16 @@ def main():
             losses.append(best_loss)
 
     # get the best model
-    best_coeffs = best_models[losses.index(min(losses))]
+    coefficients = best_models[losses.index(min(losses))]
 
-    print(f"Degree: {len(best_coeffs)}")
-    print(f"Coefficients: {best_coeffs}")
+    print(f"Degree: {len(coefficients)}")
+    print(f"Coefficients: {coefficients}")
 
     # testing the best model against data_test
-    best_model = Model(len(best_coeffs)-1)
-    best_model.load_polynomial(np.array(best_coeffs).reshape(-1,1))
+    best_model = Model(len(coefficients)-1)
+    best_model.load_polynomial(np.array(coefficients).reshape(-1,1))
 
-    test = Load_Model(x_test,y_test,64, False, True, len(best_coeffs)-1)
+    test = Load_Model(x_test,y_test,64, False, True, len(coefficients)-1)
 
     y_test_pred = best_model.forward_pass(test.get_features(x_test)).reshape(-1, 1)
     test_r2 = metrics.r2_score(y_test, y_test_pred.data)
