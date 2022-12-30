@@ -62,7 +62,6 @@ class Load_Model:
                 x_batch = self.get_features(x_batch)
             yield x_batch, y_batch
             
-
     def get_features(self, x):
         b = np.hstack((np.ones((len(x), 1)),x))
         feats = np.hstack([((b[:,1] ** i).reshape((len(x),1))) for i in range(self.degree+1)])
@@ -85,7 +84,7 @@ class Load_Model:
         self.x = x_shuffled
         self.y = y_shuffled
 
-def get_mean_squared_error(y, y_hat):
+def get_mean_squared_error(y_hat, y):
     return ((y-y_hat)**2).mean()
 
 def main():
