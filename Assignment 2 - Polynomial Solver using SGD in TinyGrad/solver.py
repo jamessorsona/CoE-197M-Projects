@@ -161,7 +161,7 @@ def main():
     best_model = Model(len(coefficients)-1)
     best_model.load_polynomial(np.array(coefficients).reshape(-1,1))
 
-    test = Load_Model(x_test,y_test,64, False, True, len(coefficients)-1)
+    test = Load_Model(x_test, y_test, 32, False, True, len(coefficients)-1)
 
     y_test_pred = best_model.forward_pass(test.get_features(x_test)).reshape(-1, 1)
     test_r2 = metrics.r2_score(y_test, y_test_pred.data)
