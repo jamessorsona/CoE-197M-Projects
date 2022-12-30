@@ -85,6 +85,9 @@ class Load_Model:
         self.x = x_shuffled
         self.y = y_shuffled
 
+def get_mean_squared_error(y, y_hat):
+    return ((y-y_hat)**2).mean()
+
 def main():
 
     # import data
@@ -154,7 +157,7 @@ def main():
     best_coeffs = best_models[losses.index(min(losses))]
 
     print(f"Degree: {len(best_coeffs)}")
-    print(f"Best Coefficients: {best_coeffs}")
+    print(f"Coefficients: {best_coeffs}")
 
     # testing the best model against data_test
     best_model = Model(len(best_coeffs)-1)
