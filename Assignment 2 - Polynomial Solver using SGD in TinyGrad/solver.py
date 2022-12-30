@@ -146,7 +146,6 @@ def main():
             if best_loss is not None and best_loss > validate_loss:
                 best = [c[0] for c in model.get_polynomial()]
                     
-
             best_models.append([c[0] for c in model.get_polynomial()])
             losses.append(best_loss)
 
