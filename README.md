@@ -28,6 +28,12 @@ Install requirements:
 ```
 pip install -r requirements.txt
 ```
+Installing tinygrad:
+```
+git clone https://github.com/geohot/tinygrad
+cd tinygrad
+puthon3 setup.py develop
+```
 Usage: 
 ```
 python3 solver.py
